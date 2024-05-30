@@ -12,6 +12,13 @@ import s2 from '../../assets/s2.svg'
 import s3 from '../../assets/s3.svg'
 import s4 from '../../assets/s4.svg'
 import s5 from '../../assets/s5.svg'
+import Slider from 'react-slick'
+
+
+import item01 from "../../assets/p1.jpg";
+import item02 from "../../assets/p2.jpg";
+import item03 from "../../assets/p3.jpg";
+import item04 from "../../assets/p4.jpg";
 
 
 const ProductInside = () => {
@@ -36,49 +43,57 @@ const ProductInside = () => {
   let [number, setNumber] = useState(1)
 
 
+
+  const settings = {
+    arrows: false,
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    appendDots: dots => (
+        <div>
+            <ul className='flex gap-x-5 mt-5'> {dots} </ul>
+        </div>
+    ),
+    customPaging: i => (
+        <div
+            className="lg:w-[120px] w-10 lg:h-[120px] h-10 bg-cover cursor-pointer"
+            style={{ backgroundImage: `url(${[item01, item02, item03, item04][i]})` }}
+        >
+        </div>
+    )
+};
+
+
   return (
     <div>
-        <Container>
-            <Breadcrumb/>
+        <Container className={`px-3 lg:px-0`}> 
+            <Breadcrumb className="!text-base"/>
+
+                <div className='lg:w-[700px] w-[320px] lg:h-[700px] h-[320px] lg:mt-32 mt-8'>
+                    <Slider  {...settings}>
+                        <div className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px]'>
+                            <Image className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px] object-cover' src={item01} alt="item01" />
+                        </div>
+                        
+                        <div className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px]'>
+                            <Image className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px] object-cover' src={item02} alt="item01" />
+                        </div>
+                        
+                        <div className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px]'>
+                            <Image className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px] object-cover' src={item03} alt="item01" />
+                        </div>
+                        
+                        <div className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px]'>
+                            <Image className='lg:w-[700px] w-[320px] lg:h-[500px] h-[220px] object-cover' src={item04} alt="item01" />
+                        </div>
+                        
+                    </Slider>
+                </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div className='w-[782px] h-[782px]  mt-12'>
+            <div className='lg:w-[782px]'>
                 <Title text="Product"/>
                 <div className="review mt-[18px] flex gap-x-[25px]">
                   <div className="icon text-[#FFD881] w-[70px] h-3 flex">
@@ -95,13 +110,13 @@ const ProductInside = () => {
                 </div>
 
                 <div className='flex items-center my-6 gap-x-6'>
-                  <p className='line-through text-base text-[#767676] font-normal'>$88.00</p>
-                  <p className='text-[#262626] font-bold text-xl'>$44.00</p>
+                  <p className='line-through lg:text-base text-sm text-[#767676] font-normal'>$88.00</p>
+                  <p className='text-[#262626] font-bold lg:text-xl text-base'>$44.00</p>
                 </div>
-                <p className='border-b border-[#F0F0F0] mb-7'></p>
+                <p className='border-b border-[#F0F0F0] lg:mb-7 mb-3 w-[320px] lg:w-full'></p>
 
-                <div className='flex gap-x-14'>
-                  <p className='text-base font-bold leading-6'>COLOR:</p>
+                <div className='flex gap-x-14 items-center'>
+                  <p className='lg:text-base text-xs font-bold lg:leading-6 leading-4'>COLOR:</p>
                   <div className='flex items-center gap-x-4'>
                     <Image src={s1}/>
                     <Image src={s2}/>
@@ -115,9 +130,9 @@ const ProductInside = () => {
                 <div className='mt-8'>
                 <label className='font-DM font-bold lg:text-base text-sm leading-7 text-[#262626] lg:mr-[76px]' >
 
-                <span className="hidden lg:inline">SIZE:</span>
+                <span className="mr-8 lg:text-base text-xs font-bold lg:leading-6 leading-4 ">SIZE:</span>
                 </label>
-                <select className='lg:w-[139px] lg:h-9 py-1 lg:px-5 px-1 lg:text-base text-sm leading-7 outline-none border border-[#F0F0F0] bg-transparent text-[#767676]'>
+                <select className='lg:w-[139px] lg:h-9 py-1 lg:px-5 px-1 lg:text-base text-sm leading-7 outline-none border border-[#F0F0F0] bg-transparent text-[#767676] cursor-pointer'>
 
                 <option className='p-7'value="S">
                 S</option>
@@ -135,49 +150,49 @@ const ProductInside = () => {
                 </div>
 
                
-                <p className='flex items-center gap-x-8  text-base font-bold leading-6 py-[30px] border-b border-[#F0F0F0]'>QUANTITY:
+                <p className='flex  items-center gap-x-8   py-[30px] border-b border-[#F0F0F0] w-[320px] lg:w-full lg:text-base text-xs font-bold lg:leading-6 leading-4'>QUANTITY:
 
-                  <div className='flex items-center border'>
+                  <div className='flex items-center border cursor-pointer'>
                   <div
-                     onClick={()=> number<=1 ? setNumber(1):setNumber(--number)} className='w-14 h-8 flex items-center justify-center'>
+                     onClick={()=> number<=1 ? setNumber(1):setNumber(--number)} className='lg:w-14 lg:h-8 w-8 h-6 flex items-center justify-center'>
                       <FaMinus />
                     </div>
-                    <p className='w-14 h-10 flex items-center justify-center'>{number}</p>
+                    <p className='lg:w-14 lg:h-8 w-8 h-6 flex items-center justify-center'>{number}</p>
                     <div 
-                    onClick={()=> setNumber(++number)} className='w-14 h-8 flex items-center justify-center'><FaPlus/></div>
+                    onClick={()=> setNumber(++number)} className='lg:w-14 lg:h-8 w-8 h-6 flex items-center justify-center'><FaPlus/></div>
                     
                   </div>
 
                 </p>
                  
 
-                <div className='flex items-center gap-x-7 border-b border-[F0F0F0]'>
-                  <p className='text-base font-bold leading-6 my-[30px]'>STATUS:</p>
+                <div className='flex items-center gap-x-7 border-b border-[#F0F0F0] w-[320px] lg:w-full'>
+                  <p className='lg:text-base text-xs font-bold lg:leading-6 leading-4 my-[30px]'>STATUS:</p>
                   
                   <p className="text-sm font-normal text-[#767676]">In stock</p>
                 </div>
 
-                <div className='mt-8 flex gap-x-5 items-center border-b border-[#F0F0F0] pb-[30px]'>
-                  <Button className="py-4 w-[200px]" text="Add to Wish List"/>
-                  <Button to={'/cart'} className="py-4 w-[200px]" text="Add to Cart"/>
+                <div className='mt-8 flex gap-x-5 items-center border-b border-[#F0F0F0] pb-[30px] w-[320px] lg:w-full'>
+                  <Button className="lg:py-4 py-2 lg:w-[200px] w-[130px] lg:text-base text-[10px] " text="Add to Wish List"/>
+                  <Button to={'/cart'} className="lg:py-4 py-2 lg:w-[200px] w-[130px] lg:text-base text-[10px] " text="Add to Cart"/>
                 </div>
 
 
 
-                <div onClick={()=> setShow3 (!show3)} className='flex justify-between items-center relative cursor-pointer'>
-                <p className='text-base font-bold w-full leading-6 py-[30px] border-b border-[#F0F0F0]'>FEATURES  & DETAILS</p>
+                <div onClick={()=> setShow3 (!show3)} className='flex justify-between items-center relative cursor-pointer w-[320px] lg:w-full'>
+                <p className='lg:text-base text-xs font-bold lg:leading-6 leading-4 lg:py-[30px] py-4 border-b border-[#F0F0F0] w-[320px] lg:w-full'>FEATURES  & DETAILS</p>
 
 
                 <FaPlus className={`absolute top-1/2 transition-all duration-500 translate-y-[-50%] right-0 ${show3? "opacity-0 invisible":"opacity-100 visible rotate-90"}`}/> <FaMinus className={`absolute top-1/2 translate-y-[-50%] right-0 ${show3? "opacity-100 visible":"opacity-0 invisible"}`}/>
                 </div>
 
-                <p className={`text-sm font-normal text-[#767676] mt-5 transition-all duration-300 border-b border-[#F0F0F0] pb-7 ${show3? "static": "absolute translate-x-[-100%] invisible"}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <p className={`text-sm font-normal text-[#767676] mt-5 transition-all duration-300 border-b border-[#F0F0F0] pb-7 w-[320px] lg:w-full ${show3? "static": "absolute translate-x-[-100%] invisible"}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
                 </p>
 
 
-                <div onClick={()=> setShow4 (!show4)} className='flex justify-between items-center cursor-pointer relative'>
-                <p className='text-base font-bold leading-6 py-[30px] w-full border-b border-[#F0F0F0]'>SHIPPING & RETURNS</p>
+                <div onClick={()=> setShow4 (!show4)} className='flex w-[320px] lg:w-full justify-between items-center cursor-pointer relative'>
+                <p className='lg:text-base text-xs font-bold lg:leading-6 leading-4 lg:py-[30px] py-4 border-b border-[#F0F0F0] w-[320px] lg:w-full'>SHIPPING & RETURNS</p>
 
 
                 <FaPlus className={`absolute top-1/2 transition-all duration-500 translate-y-[-50%] right-0 ${show4? "opacity-0 invisible":"opacity-100 visible rotate-90"}`}/> <FaMinus className={`absolute top-1/2 translate-y-[-50%] right-0 ${show4? "opacity-100 visible":"opacity-0 invisible"}`}/>
@@ -186,7 +201,7 @@ const ProductInside = () => {
 
 
 
-                <p className={`text-sm font-normal text-[#767676] mt-5 transition-all duration-300 border-b border-[#F0F0F0] pb-7 ${show4? "static": "absolute translate-x-[-100%] invisible"}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                <p className={`text-sm font-normal text-[#767676] mt-5 transition-all duration-300 border-b border-[#F0F0F0] pb-7 w-[320px] lg:w-full ${show4? "static": "absolute translate-x-[-100%] invisible"}`}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </p>
                
 
@@ -196,7 +211,7 @@ const ProductInside = () => {
 
 
 
-            <div className='mt-[123px]'>
+            <div className='lg:mt-[123px] mt-10'>
 
 
 
@@ -224,7 +239,7 @@ const ProductInside = () => {
 
 
 
-              <p className={` bg-[#1e1e1e] text-[#f6f0f0]  max-w-[600px] ${show? "opacity-100 visible z-10" : " opacity-0 hidden"}`}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia eum exercitationem assumenda odit. Ut minima saepe unde aperiam eveniet voluptatibus enim perferendis temporibus, illo libero neque quis velit atque itaque quia molestias fuga cupiditate expedita ipsum, vitae alias explicabo, odio officiis. Amet facilis ex magnam odit hic tenetur? Cumque eligendi laborum ipsum voluptatibus repellat commodi! Totam libero voluptate neque nulla laboriosam illum dicta numquam nihil optio necessitatibus, qui nemo pariatur odit incidunt quasi itaque corporis aperiam amet nam dignissimos laudantium quaerat. Quod illum fugit labore magni doloremque obcaecati, voluptatibus quos dolore beatae assumenda quibusdam quas voluptates nesciunt voluptatum, aut nemo.</p>
+              <p className={` bg-[#1e1e1e] text-[#f6f0f0]  max-w-[600px] w-[320px] lg:w-full lg:mt-10 mt-5 ${show? "opacity-100 visible z-10" : " opacity-0 hidden"}`}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia eum exercitationem assumenda odit. Ut minima saepe unde aperiam eveniet voluptatibus enim perferendis temporibus, illo libero neque quis velit atque itaque quia molestias fuga cupiditate expedita ipsum, vitae alias explicabo, odio officiis. Amet facilis ex magnam odit hic tenetur? Cumque eligendi laborum ipsum voluptatibus repellat commodi! Totam libero voluptate neque nulla laboriosam illum dicta numquam nihil optio necessitatibus, qui nemo pariatur odit incidunt quasi itaque corporis aperiam amet nam dignissimos laudantium quaerat. Quod illum fugit labore magni doloremque obcaecati, voluptatibus quos dolore beatae assumenda quibusdam quas voluptates nesciunt voluptatum, aut nemo.</p>
 
 
 
@@ -249,11 +264,11 @@ const ProductInside = () => {
                     
                   </div>
   
-                  <p className='mt-4 pb-4 border-b border-[#F0F0F0]'>Lorem Ipsum is simply dummy text of the    printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                  <p className='mt-4 pb-4 border-b border-[#F0F0F0] text-sm lg:text-base'>Lorem Ipsum is simply dummy text of the    printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                   </p>
   
-                  <div className='max-w-[780px] mt-14 flex flex-col gap-y-6'>
-                    <Title className="!text-xl mb-12" text="Add a Review"/>
+                  <div className='max-w-[780px] lg:mt-14 mt-8 flex flex-col lg:gap-y-6 gap-y-3'>
+                    <Title className="!text-xl lg:mb-12" text="Add a Review"/>
   
                     <Input className="!w-full" text="Name" type="text" placeholder="Your name here"/>
   
@@ -266,7 +281,7 @@ const ProductInside = () => {
   
   
   
-                    <Button className="w-[200px] py-4" text="Post"/>
+                    <Button className="lg:w-[200px] w-[120px] lg:py-4 py-2" text="Post"/>
                   </div>
   
   
