@@ -57,13 +57,13 @@ const Checkout = () => {
 
              <Input className="!w-full" type="text" text="Town/City *" placeholder="Town/City" />
 
-             <Input className="!w-full" type="text" text="County (optional)" placeholder="County " />
+             <Input className="!w-full" type="text" text="Country (optional)" placeholder="Country " />
 
              <Input className="!w-full" type="text" text="Post Code *" placeholder="Post Code " />
 
-             <Input className="!w-full" type="text" text="Phone *" placeholder="Phone" />
+            <Input className="!w-full" type="tel" text="Phone *" placeholder="Phone" />
 
-             <Input className="!w-full" type="text" text="Email Address *" placeholder="Email " />
+            <Input className="!w-full" type="email" text="Email Address *" placeholder="Email " />
 
             </div>
 
@@ -73,7 +73,7 @@ const Checkout = () => {
 
             <div className='lg:mt-10 mt-4 lg:mb-32 mb-6'>
             <h3 className='lg:text-base text-sm font-bold leading-6 '>Other Notes (optional)</h3>
-                <input type={`text`} placeholder="Notes about your order, e.g. special notes for delivery." className='w-full lg:pt-[10px] lg:pb-[87px] py-1 outline-none border-b border-[#F0F0F0] text-[#767676] lg:text-sm text-xs' />
+                <textarea type={`text`} placeholder="Notes about your order, e.g. special notes for delivery." className='w-full lg:pt-[10px] lg:pb-[87px] py-1 outline-none border-b border-[#F0F0F0] text-[#767676] lg:text-sm text-xs' />
         </div> 
 
 
