@@ -27,7 +27,7 @@ const App = () => {
       <Route
         path="/"
         element={<RootLayout/>}
-        errorElement={<Error />}
+        // errorElement={<Error />}
       >
         <Route index element={<Home/>} ></Route>
         <Route path="/shop" element={<Product/>}></Route>
@@ -39,7 +39,7 @@ const App = () => {
         <Route path="/cart" element={<Cart/>} ></Route>
         <Route path="/checkout" element={<Checkout/>} ></Route>
         <Route path="/error" element={<Error/>} ></Route>
-        <Route path="/productInside" element={<ProductInside/>} ></Route>
+        <Route path="/productinside" element={<ProductInside/>} ></Route>
 
       </Route>
     )

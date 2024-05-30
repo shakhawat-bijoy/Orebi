@@ -33,6 +33,8 @@ const ProductInside = () => {
     setIsActive2 (!isActive2)
   }
 
+  let [number, setNumber] = useState(1)
+
 
   return (
     <div>
@@ -132,8 +134,22 @@ const ProductInside = () => {
                 </select>
                 </div>
 
+               
+                <p className='flex items-center gap-x-8  text-base font-bold leading-6 py-[30px] border-b border-[#F0F0F0]'>QUANTITY:
 
-                <p className='text-base font-bold leading-6 py-[30px] border-b border-[#F0F0F0]'>QUANTITY:</p>
+                  <div className='flex items-center border'>
+                  <div
+                     onClick={()=> number<=1 ? setNumber(1):setNumber(--number)} className='w-14 h-8 flex items-center justify-center'>
+                      <FaMinus />
+                    </div>
+                    <p className='w-14 h-10 flex items-center justify-center'>{number}</p>
+                    <div 
+                    onClick={()=> setNumber(++number)} className='w-14 h-8 flex items-center justify-center'><FaPlus/></div>
+                    
+                  </div>
+
+                </p>
+                 
 
                 <div className='flex items-center gap-x-7 border-b border-[F0F0F0]'>
                   <p className='text-base font-bold leading-6 my-[30px]'>STATUS:</p>
@@ -143,7 +159,7 @@ const ProductInside = () => {
 
                 <div className='mt-8 flex gap-x-5 items-center border-b border-[#F0F0F0] pb-[30px]'>
                   <Button className="py-4 w-[200px]" text="Add to Wish List"/>
-                  <Button className="py-4 w-[200px]" text="Add to Cart"/>
+                  <Button to={'/cart'} className="py-4 w-[200px]" text="Add to Cart"/>
                 </div>
 
 

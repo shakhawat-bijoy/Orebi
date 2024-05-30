@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Container from '../layer/Container'
 import Header from '../layer/Header'
 import Listitem from '../layer/Listitem'
@@ -8,10 +8,14 @@ import Image from '../layer/Image'
 import { ImCross } from 'react-icons/im'
 import p12 from '../../assets/p12.jpg'
 import { Link } from 'react-router-dom'
+import { FaMinus, FaPlus } from 'react-icons/fa'
 
 
 
 const Cart = () => {
+
+  let [number, setNumber] = useState(1)
+
   return (
     <div>
         <Container className="px-3 lg:px-0">
@@ -31,11 +35,22 @@ const Cart = () => {
 
             <Image className="lg:w-[100px] lg:h-[100px] w-[35px] h-[35px] lg:ml-10 ml-2 lg:mr-5 mr-1" src={p12}/>
 
-            <p className='text-[#262626] lg:text-base text-[8px] lg:font-bold font-normal lg:leading-6 lg:mr-[123px] mr-2'>Product name</p>
+            <p className='text-[#262626] lg:text-base text-[8px] lg:font-bold font-normal lg:leading-6 mr-2'>Product name</p>
 
-            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:mr-[313px] mr-14'>$44.00</p>
-            <p className='lg:mr-[271px] mr-[70px] lg:text-base text-[8px]'>pari na</p>
-            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:mr-[313px]'>$44.00</p>
+            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:ml-[160px]'>$44.00</p>
+            <p className='lg:ml-[310px] lg:text-base text-[8px]'>
+            <div className='flex items-center border'>
+                  <div
+                     onClick={()=> number<=1 ? setNumber(1):setNumber(--number)} className='w-14 h-8 flex items-center justify-center'>
+                      <FaMinus />
+                    </div>
+                    <p className='w-14 h-10 flex items-center justify-center'>{number}</p>
+                    <div 
+                    onClick={()=> setNumber(++number)} className='w-14 h-8 flex items-center justify-center'><FaPlus/></div>
+                    
+                  </div>
+            </p>
+            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:ml-[300px]'>$44.00</p>
             
 
           </div>
@@ -108,7 +123,7 @@ const Cart = () => {
 
               <div className='flex justify-end'>
 
-                <Button className="py-4 px-7 mt-[30px]" text="Proceed to Checkout"/>
+                <Button to={'/checkout'} className="py-4 px-7 mt-[30px]" text="Proceed to Checkout"/>
               </div>
             </div>
 

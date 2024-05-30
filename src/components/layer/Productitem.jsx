@@ -3,6 +3,7 @@ import Listitem from './Listitem'
 import { FaHeart } from "react-icons/fa";
 import { LuRefreshCcw } from "react-icons/lu";
 import { FaShoppingCart } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 
@@ -43,10 +44,12 @@ const Productitem = ({src, alt, className, offer}) => {
         </div>
 
         <div className="text font-DM px-3 lg:px-0">
+            <Link to={'/productinside'}>
             <h2 className='flex justify-between text-xl font-bold pt-6 '>
                 Basic Crew Neck Tee 
                 <p className='text-[#767676] text-base font-normal leading-7 '>$44.00</p>
             </h2>
+            </Link>
             <p className='text-[#767676] text-base font-normal leading-7 pt-4'>Black</p>
 
         </div>
