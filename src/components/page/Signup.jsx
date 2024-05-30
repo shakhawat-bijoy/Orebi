@@ -8,6 +8,12 @@ import { BiCheckboxSquare } from "react-icons/bi";
 import Button from '../layer/Button'
 import FromError from '../layer/FromError'
 
+import { getAuth, createUserWithEmailAndPassword, sendEmailVerification,  } from "firebase/auth";
+import { Triangle } from 'react-loader-spinner'
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 const Signup = () => {
     
     let [name, setName] = useState("")
@@ -21,6 +27,12 @@ const Signup = () => {
 
     let [repeatPassword, setRepeatPassword] = useState("")
     let [repeatPasswordErr, setRepeatPasswordErr] = useState("")
+
+    let [triangle, setTriangle] = useState(true)
+
+    const auth = getAuth();
+
+    let navigate = useNavigate ()
 
     let changeName = (e) => {
         setName(e.target.value);
@@ -61,7 +73,8 @@ const Signup = () => {
         if (!password) {
             setpassworderr("Password is Required")
             valid = false;
-        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(password)) {
+        } 
+        else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/.test(password)) {
             setpassworderr("The Password must contain at least 1 lowercase, 1 uppercase, 1 numeric character, 1 special character and also must be 8 characters or longer :)")
             valid = false;
         }
@@ -78,10 +91,57 @@ const Signup = () => {
             // Proceed with form submission
             console.log("Form submitted successfully");
         }
+
+        if (name && email && password && /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/ && /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/ ) {
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+              // Signed up 
+              const user = userCredential.user;
+              setName("")
+              setEmail("")
+              setPassword("")
+              setTriangle(false)
+              toast.success('🦄 Registration Succesful!')
+              // ...
+            })
+            .then (()=>{
+                sendEmailVerification(auth.currentUser)
+                .then(() => {
+                    // Email verification sent!
+                    // ...
+                    console.log("Send Email");
+                    setTimeout(()=>{
+                        navigate("/login")
+                      }, 2000)
+                });
+
+            })
+            .catch((error) => {
+              if (error.code.includes ("auth/email-already-in-use")) {
+                setEmailerr("Email already in use")
+                toast.error('🦄 Something Is Wrong')
+              }
+              // ..
+            });
+        }
     }
 
     return (
         <div>
+            <ToastContainer
+            className="w-48 md:w-auto"
+                position="top-right"
+                autoClose={1500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                />
+
             <Container className="font-DM px-3 lg:px-0">
                 <Header text="Sign up" />
                 <div className='border-b border-[#F0F0F0]'>
@@ -148,7 +208,23 @@ const Signup = () => {
                         <span className='pl-4'>No</span>
                     </p>
 
-                    <Button onClick={submit} className="lg:py-4 py-2 lg:pl-[77px] pl-[37px] lg:pr-[83px] pr-[41px] w-[200px]" text="Continue" />
+                    {
+                        triangle ? <Button onClick={submit} className="lg:py-4 py-2 lg:pl-[77px] pl-[37px] lg:pr-[83px] pr-[41px] w-[200px]" text="Continue" />
+                        : 
+                        <Triangle
+                        visible={true}
+                        height="80"
+                        width="80"
+                        color="#4fa94d"
+                        ariaLabel="triangle-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""/>
+                    }
+
+                    
+
+
+
                 </div>
             </Container>
         </div>

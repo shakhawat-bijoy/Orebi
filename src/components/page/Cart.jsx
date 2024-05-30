@@ -87,29 +87,24 @@ const Cart = () => {
 
 
 
-          {/* <div className='flex justify-between mt-14'>
+        <div className='flex justify-between mt-14'>
 
 
             <div>
               <p></p>
             </div>
 
-            <div className="total">
+            <div className="total lg:w-[644px] w-[320px]">
               <h5 className='text-[#262626] text-xl font-bold mb-6 text-end'>Cart totals</h5>
 
-              <div className='max-w-[644px] flex justify-between items-center'>
-
-              <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 w-[320px] '>Subtotal </p>
-              <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 pr-[237px]'>389.99$</p>
-
-            </div>
-            <div className='max-w-[644px] flex justify-between items-center'>
-              <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 w-[320px] '>Total </p>
-              <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 pr-[237px]'>389.99$</p>
-
-
-              
-            </div>
+              <div className='flex'>
+                <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 lg:w-[322px] w-[230px]'>Subtotal</p>
+                <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 lg:w-[322px] w-[100px]'>389.99$</p>
+              </div> 
+              <div className='flex'>
+                <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 lg:w-[322px] w-[230px]'>Total</p>
+                <p className='text-[#262626] text-base font-bold leading-6 border border-[#F0F0F0] py-4 pl-5 lg:w-[322px] w-[100px]'>389.99$</p>
+              </div> 
 
               <div className='flex justify-end'>
 
@@ -118,7 +113,7 @@ const Cart = () => {
             </div>
 
 
-          </div> */}
+          </div>
 
 
          
