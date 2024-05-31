@@ -35,22 +35,22 @@ const Cart = () => {
 
             <Image className="lg:w-[100px] lg:h-[100px] w-[35px] h-[35px] lg:ml-10 ml-2 lg:mr-5 mr-1" src={p12}/>
 
-            <p className='text-[#262626] lg:text-base text-[8px] lg:font-bold font-normal lg:leading-6 mr-2'>Product name</p>
+            <p className='text-[#262626] lg:text-base text-xs lg:font-bold font-normal lg:leading-6 mr-2'>Product <br />name</p>
 
-            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:ml-[160px]'>$44.00</p>
-            <p className='lg:ml-[310px] lg:text-base text-[8px]'>
-            <div className='flex items-center border'>
+            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:ml-[200px] ml-2'>$44.00</p>
+            <p className='lg:ml-[320px] ml-10 lg:text-base text-[8px]'>
+            <div className='flex items-center border '>
                   <div
-                     onClick={()=> number<=1 ? setNumber(1):setNumber(--number)} className='w-14 h-8 flex items-center justify-center'>
+                     onClick={()=> number<=1 ? setNumber(1):setNumber(--number)} className='lg:w-14 w-8 lg:h-8  h-6 flex items-center justify-center'>
                       <FaMinus />
                     </div>
-                    <p className='w-14 h-10 flex items-center justify-center'>{number}</p>
+                    <p className='lg:w-14 w-8 lg:h-10 h-6  flex items-center justify-center'>{number}</p>
                     <div 
-                    onClick={()=> setNumber(++number)} className='w-14 h-8 flex items-center justify-center'><FaPlus/></div>
+                    onClick={()=> setNumber(++number)} className='lg:w-14 w-8 lg:h-8  h-6 flex items-center justify-center'><FaPlus/></div>
                     
                   </div>
             </p>
-            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:ml-[300px]'>$44.00</p>
+            <p className='text-[#262626] lg:text-xl text-[8px] font-bold lg:ml-[300px] ml-6'>$44.00</p>
             
 
           </div>
@@ -123,7 +123,7 @@ const Cart = () => {
 
               <div className='flex justify-end'>
 
-                <Button to={'/checkout'} className="py-4 px-7 mt-[30px]" text="Proceed to Checkout"/>
+                <Button to={'/checkout'} className="lg:w-[200px] w-[140px] lg:py-4 py-2 lg:mt-8 mt-4 text-xs lg:text-base" text="Proceed to Checkout"/>
               </div>
             </div>
 
