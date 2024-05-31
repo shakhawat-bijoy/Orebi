@@ -6,8 +6,7 @@ import Button from '../layer/Button'
 
 import { FaPlus } from "react-icons/fa6";
 import { Link } from 'react-router-dom'
-import { GoTriangleDown, GoTriangleRight } from "react-icons/go";
-import { FaMinus } from 'react-icons/fa'
+import { GoTriangleDown } from "react-icons/go";
 
 
 
@@ -63,16 +62,16 @@ const Contacts = () => {
 
 
 
-          <div className='lg:mt-[140px] mt-10 relative lg:pb-0 pb-80'>
+          <div className='lg:mt-[140px] mt-10 relative lg:pb-0 pb-40'>
             <iframe className="w-full lg:h-[572px] h-[220px]" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3652.0034070684023!2d90.37906939272749!3d23.747257914212753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1714647912145!5m2!1sen!2sbd"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 
-              <div className='lg:w-[452px] absolute lg:top-20  lg:left-20 translate-y-5 bg-[#FFFFFF] px-5 '>
+              <div className='lg:w-[452px] w-[330px] absolute lg:top-20  lg:left-20 translate-y-5 bg-[#FFFFFF] px-5 '>
 
                 <div onClick={()=> setShow (!show)}
                 className='relative'
               >
-                <h4 className='text-base font-bold leading-6 lg:py-[30px] py-3 lg:pb-5 flex justify-between items-center cursor-pointer relative'>Lithuania Office <span>
+                <h4 className='text-base font-bold leading-6 lg:py-[30px] py-3 lg:pb-5 flex justify-between items-center cursor-pointer relative'>Germany Office<span>
                   <FaPlus className={`absolute top-1/2 transition-all duration-500 translate-y-[-50%] right-0 ${show? "opacity-0 invisible":"opacity-100 visible rotate-90"}`}/> <GoTriangleDown className={`absolute top-1/2 translate-y-[-50%] right-0 ${show? "opacity-100 visible":"opacity-0 invisible rotate-90"}`}/>
                 </span>
                 
@@ -99,7 +98,7 @@ const Contacts = () => {
               <div onClick={()=> setShow2 (!show2)}
                className='relative'
               >
-                <h4 className='text-base font-bold leading-6 lg:py-[30px] py-3 lg:pb-5 flex justify-between items-center cursor-pointer relative'>Lithuania Office <span>
+                <h4 className='text-base font-bold leading-6 lg:py-[30px] py-3 lg:pb-5 flex justify-between items-center cursor-pointer relative'>Slovakia Office<span>
                   <FaPlus className={`absolute top-1/2 transition-all duration-500 translate-y-[-50%] right-0 ${show2? "opacity-0 invisible":"opacity-100 visible rotate-90"}`}/> <GoTriangleDown className={`absolute top-1/2 translate-y-[-50%] right-0 ${show2? "opacity-100 visible":"opacity-0 invisible rotate-90"}`}/>
                 </span>
                 
@@ -128,8 +127,8 @@ const Contacts = () => {
               <div onClick={()=> setShow3 (!show3)}
               className='relative'
               >
-                <h4 className='text-base font-bold leading-6 lg:py-[30px] py-3 lg:pb-5 flex justify-between items-center cursor-pointer relative'>Lithuania Office <span>
-                  <FaPlus className={`absolute top-1/2 transition-all duration-500 translate-y-[-50%] right-0 ${show3? "opacity-0 invisible":"opacity-100 visible rotate-90"}`}/> <GoTriangleDown className={`absolute top-1/2 translate-y-[-50%] right-0 ${show3? "opacity-100 visible":"opacity-0 invisible rotate-90"}`}/>
+                <h4 className='text-base font-bold leading-6 lg:py-[30px] py-3 lg:pb-8 flex justify-between items-center cursor-pointer relative'>Lithuania Office <span>
+                  <FaPlus className={`absolute lg:top-1/2  transition-all duration-500 translate-y-[-50%] right-0 ${show3? "opacity-0 invisible":"opacity-100 visible rotate-90"}`}/> <GoTriangleDown className={`absolute top-1/2 translate-y-[-50%] right-0 ${show3? "opacity-100 visible":"opacity-0 invisible rotate-90"}`}/>
                 </span>
                 
                 </h4>
