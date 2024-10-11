@@ -1,54 +1,66 @@
-import React, { useEffect, useState } from 'react'
-import Container from './layer/Container'
-import Button from './layer/Button'
+import React, { useEffect, useState } from 'react';
+import Container from './layer/Container';
+import Button from './layer/Button';
+import Productitem from './layer/Productitem'; // Ensure this is your full product item component
 import { HiOutlineBars3BottomLeft } from "react-icons/hi2";
-import { FaSearch,FaUser,FaAngleRight, FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { ImCross } from "react-icons/im";
-import Listitem from './layer/Listitem';
 import Image from './layer/Image';
-import p1 from '.././assets/p1.jpg'
-
-
+import p1 from '.././assets/p1.jpg';
+import axios from 'axios';
+import Listitem from './layer/Listitem';
 
 const Searchbar = () => {
-
-  let [show, setShow] = useState (false)
+  const [show, setShow] = useState(false);
+  const [show2, setShow2] = useState(false);
+  const [showcart, setShowcart] = useState(false);
+  const [search, setSearch] = useState("");
+  const [product, setProduct] = useState([]);
+  const [filterProduct, setFilterProduct] = useState([]);
 
   useEffect(()=>{
     if(window){
       setShow(false)
-  }else{
+    }else{
       setShow(true)
-  }
+    }
   },[])
-
-
+  
+  
   let catagory = ()=>{
     setShow(!show)
   }
+  
 
+  // Fetch product data
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get("https://dummyjson.com/products");
+      setProduct(res.data.products);
+      setFilterProduct([]); // Initially, no products are filtered
+    }
+    getData();
+  }, []);
 
+  // Filter products based on search
+  useEffect(() => {
+    if (search === "") {
+      setFilterProduct([]); // If no search term, hide products
+    } else {
+      const filteredData = product.filter((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilterProduct(filteredData);
+    }
+  }, [search, product]);
 
-  let [show2, setShow2] = useState (false)
-
-  let [showcart, setShowcart] = useState (false)
-
-  // useEffect(()=>{
-  //   if(window){
-  //     setShow2(false)
-  // }else{
-  //     setShow2(true)
-  // }
-  // },[])
-
-  // let acc = ()=>{
-  //   setShow2(!show2)
-  // }
+  // Handle search input
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
 
   return (
-    <div className='lg:py-10 py-2 bg-[#F5F5F3]'>
-
+    <div className='lg:py-10 py-2 bg-[#F5F5F3] relative'>
       <Container className='flex justify-between items-center font-DM flex-row px-3 lg:px-0'>
 
         <div onClick={catagory} className='relative order-1'>
@@ -81,12 +93,16 @@ const Searchbar = () => {
             )
           }
 
-
-
         </div>
 
         <div className='relative lg:order-2 order-3'>
-          <input type="text" placeholder='Search Products' className='lg:w-[601px] w-full lg:py-4 py-1 px-5 bg-white outline-none' />
+        <input
+            type="text"
+            placeholder='Search Products'
+            className='lg:w-[601px] w-full lg:py-4 py-1 px-5 bg-white outline-none rounded-lg shadow-md'
+            value={search}
+            onChange={handleSearchChange}
+          />
           <FaSearch className='absolute right-1 lg:right-5 top-1/2 translate-y-[-50%]' />
 
         </div>
@@ -101,7 +117,7 @@ const Searchbar = () => {
                   <div className='relative' >
 
 
-             <div className="bottom  absolute lg:translate-x-[-100%] translate-x-[-95%] top-8  lg:w-[200px] w-[150px] bg-[#FFF]">
+            <div className="bottom  absolute lg:translate-x-[-100%] translate-x-[-95%] top-8  lg:w-[200px] w-[150px] bg-[#FFF]">
                   <div className="button flex flex-col w-full">
                     <Button className="lg:py-4 py-2 w-full" text="My Account" to="/myaccount"/>
                     <Button className="lg:py-4 py-2 w-full" text="Log In" to="/login"/>
@@ -114,21 +130,14 @@ const Searchbar = () => {
             </div>
                 )
               }
-
-
-
-
-
-
           </div>
-
 
           <div onClick={()=>setShowcart (!showcart)}
             className='relative cursor-pointer '>
             <FaShoppingCart />
 
 
-             {
+            {
               showcart && (
                 <div className="cart lg:w-[360px] w-[200px] absolute right-0 top-full lg:translate-y-[15px] translate-y-[20px]
                 translate-x-[90%] lg:translate-x-0 z-30">
@@ -162,7 +171,7 @@ const Searchbar = () => {
                 </div>
               </div>
               )
-             }
+            }
 
 
 
@@ -173,8 +182,32 @@ const Searchbar = () => {
 
       </Container>
 
+      {/* Search results - only show when the search input is not empty */}
+      {search && (
+        <div className='px-5 mt-4'>
+          {filterProduct.length > 0 ? (
+            <Container>
+              <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4'>
+              {filterProduct.map((item) => (
+                <Productitem 
+                  key={item.id}
+                  src={item.thumbnail} 
+                  title={item.title} 
+                  price={item.price} 
+                  offer={item.discountPercentage} // Example offer, adjust based on your data
+                />
+              ))}
+            </div>
+            </Container>
+          ) : (
+            <Container>
+              <p className='text-center text-base text-gray-600'>No products found for "{search}".</p>
+            </Container>
+          )}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
-export default Searchbar
+export default Searchbar;

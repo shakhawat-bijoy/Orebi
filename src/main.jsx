@@ -1,11 +1,15 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import firebaseConfig from './firebaseConfig.js'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+import { Provider } from 'react-redux'; // Redux Provider
+import { store } from './store.js'; // Your Redux store
+import firebaseConfig from './firebaseConfig.js' // Firebase initialization (if applicable)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
+);

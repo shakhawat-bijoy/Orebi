@@ -1,13 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Container from './layer/Container'
 import Productitem from './layer/Productitem'
-import p1 from '../../src/assets/p1.jpg'
-import p2 from '../../src/assets/p2.jpg'
-import p3 from '../../src/assets/p3.jpg'
-import p4 from '../../src/assets/p4.jpg'
 import Slider from 'react-slick'
 import { FaArrowRightLong,FaArrowLeftLong } from "react-icons/fa6";
 import Title from './layer/Title'
+import axios from 'axios'
 
 
 
@@ -15,7 +12,7 @@ function SampleNextArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
-      className='w-16 h-16 absolute right-5 top-1/2 translate-y-[-100%] rounded-full bg-[#c3c3c2] !flex justify-center items-center'
+      className='w-16 h-16 absolute right-5 top-1/2 translate-y-[-100%] rounded-full bg-[#c3c3c2] !flex justify-center items-center cursor-pointer'
       style={{ ...style, display: "block", }}
       onClick={onClick}
     >
@@ -29,7 +26,7 @@ function SamplePrevArrow(props) {
   const { className, style, onClick } = props;
   return (
     <div
-    className='w-16 h-16 absolute left-5 top-1/2 translate-y-[-100%] rounded-full bg-[#c3c3c2] !flex justify-center items-center z-50'
+    className='w-16 h-16 absolute left-5 top-1/2 translate-y-[-100%] rounded-full bg-[#c3c3c2] !flex justify-center items-center z-50 cursor-pointer'
     style={{ ...style, display: "block", }}
     onClick={onClick}
   >
@@ -125,12 +122,24 @@ const Arrivals = () => {
 
     };
 
+    const [product, setProduct] =  useState([])
 
+
+    useEffect(() => {
+      const getData = async () => {
+        const slide = await axios.get("https://dummyjson.com/products")
+        setProduct(slide.data.products);
+        
+      }
+
+      getData()
+    }, [])
+    
 
 
 
   return (
-    <div className='lg:pt-32 pt-8 md:pt-14'>
+    <div className=' pt-8 md:pt-20'>
         <Container>
         <Title className='px-3 lg:px-0' text="New Arrivals"/>
         </Container>
@@ -141,18 +150,20 @@ const Arrivals = () => {
 
         <div>
             <Slider {...settings}>
-              <div>
-                <Productitem className="mx-auto" src={p1} offer="10%"/>
-              </div>
-              <div>
-              <Productitem className="mx-auto" src={p2} offer="New"/>
-              </div>
-              <div>
-                <Productitem className="mx-auto" src={p3} offer="New"/>
-              </div>
-              <div>
-                <Productitem className="mx-auto" src={p4} offer="New"/>
-              </div>
+              {
+                product.map((item, index )=> (
+                  <div key={index}>
+                    <Productitem 
+                      className="mx-auto" 
+                      src={item.thumbnail} 
+                      title={item.title} 
+                      price={item.price}
+                      category={item.category}
+                      offer={item.discountPercentage}
+                    />
+                  </div>
+                ))
+              }
 
             </Slider>
           </div>
